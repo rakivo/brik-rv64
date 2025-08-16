@@ -1,0 +1,19 @@
+[package]
+name = "brik_rv64"
+version = "0.1.0"
+license = "MIT"
+description = "RISC-V Assembly Encoder / Decoder."
+repository = "https://github.com/rakivo/brik_rv64"
+include = ["Cargo.toml", "README.md", "src/*"]
+categories = [
+    "compilers",
+    "encoding",
+    "hardware-support",
+    "parser-implementations",
+]
+keywords = ["riscv", "assembly", "encode", "decode", "asm"]
+readme = "README.md"
+edition = "2021"
+
+[dependencies]
+brik_rv32 = "0.2.1"
