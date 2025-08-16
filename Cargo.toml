@@ -1,6 +1,6 @@
 [package]
 name = "brik_rv64"
-version = "0.1.0"
+version = "0.1.1"
 license = "MIT"
 description = "RISC-V Assembly Encoder / Decoder."
 repository = "https://github.com/rakivo/brik_rv64"
