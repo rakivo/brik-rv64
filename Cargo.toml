@@ -16,4 +16,4 @@ readme = "README.md"
 edition = "2021"
 
 [dependencies]
-brik_rv32 = "0.2.1"
+brik_rv32 = "0.2.2"
