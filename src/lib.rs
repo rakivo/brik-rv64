@@ -49,11 +49,11 @@ pub enum I64 {
     /// R: Shift Right Arithmetic Word (`R[d]: sext(R[s1][31:0] >>> R[s2][4:0])`) - RV64 only, 32-bit arithmetic right shift with sign extension
     SRAW { d: Reg, s1: Reg, s2: Reg },
     /// I: Shift Left Logical Immediate Word (`R[d]: sext(R[s][31:0] << shamt)`) - RV64 only, 32-bit left shift immediate with sign extension
-    SLLIW { d: Reg, s: Reg, shamt: i8 },
+    SLLIW { d: Reg, s: Reg, shamt: u8 },
     /// I: Shift Right Logical Immediate Word (`R[d]: sext(R[s][31:0] >> shamt)`) - RV64 only, 32-bit logical right shift immediate with sign extension
-    SRLIW { d: Reg, s: Reg, shamt: i8 },
+    SRLIW { d: Reg, s: Reg, shamt: u8 },
     /// I: Shift Right Arithmetic Immediate Word (`R[d]: sext(R[s][31:0] >>> shamt)`) - RV64 only, 32-bit arithmetic right shift immediate with sign extension
-    SRAIW { d: Reg, s: Reg, shamt: i8 },
+    SRAIW { d: Reg, s: Reg, shamt: u8 },
 
     //// RV64 M-extension instructions (64-bit variants and 32-bit word operations) ////
     /// R: Multiply Word (`R[d]: sext(R[s1][31:0] * R[s2][31:0])`) - RV64 only, 32-bit multiply with sign extension
@@ -162,12 +162,12 @@ impl I64 {
             0b0011011 => match I32::from_i(with) {
                 (d, 0b000, s, im) => ADDIW { d, s, im },
                 (d, 0b001, s, im) => match (im >> 5) & 0b1111111 {
-                    0b0000000 => SLLIW { d, s, shamt: im as i8 },
+                    0b0000000 => SLLIW { d, s, shamt: im as u8 },
                     _ => return Err(ConversionError::UnknownFunct7((im >> 5) as _))
                 },
                 (d, 0b101, s, im) => match (im >> 5) & 0b1111111 {
-                    0b0000000 => SRLIW { d, s, shamt: im as i8 },
-                    0b0100000 => SRAIW { d, s, shamt: im as i8 },
+                    0b0000000 => SRLIW { d, s, shamt: im as u8 },
+                    0b0100000 => SRAIW { d, s, shamt: im as u8 },
                     _ => return Err(ConversionError::UnknownFunct7((im >> 5) as _))
                 },
                 (_, funct, _, _) => {
