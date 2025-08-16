@@ -222,3 +222,20 @@ impl I64 {
         })
     }
 }
+
+impl From<I64> for u32 {
+    #[inline(always)]
+    fn from(with: I64) -> Self {
+        I64::into_u32(with)
+    }
+}
+
+impl TryFrom<u32> for I64 {
+    type Error = ConversionError;
+    // Using match makes it easier to extend code in the future.
+    #[allow(clippy::match_single_binding)]
+    fn try_from(with: u32) -> Result<Self, Self::Error> {
+        Self::try_from_u32(with)
+    }
+}
+
