@@ -106,7 +106,7 @@ impl I64 {
         match self {
             // RV64I Base loads/stores
             LD { d, s, im }     => I32::i(0x03, d, 0b011, s, im),
-            SD { s1, s2, im }   => I32::s(0x23, 0b011, s1, s2, im),
+            SD { s1, s2, im }   => I32::s(0x23, 0b011, s2, s1, im),
             LWU { d, s, im }    => I32::i(0x03, d, 0b110, s, im),
 
             // RV64I word operations
